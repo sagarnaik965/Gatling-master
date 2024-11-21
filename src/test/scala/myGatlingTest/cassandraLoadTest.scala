@@ -22,10 +22,9 @@ class cassandraLoadTest extends Simulation {
 
   setUp(
     scnLoad.inject(
-      //      			nothingFor(60 seconds),
-      //      atOnceUsers(10),
+            			nothingFor(5 seconds),
       //      			rampUsers(2) during (10 seconds),
-      constantUsersPerSec(800) during (20 seconds)
+      constantUsersPerSec(500) during (100 seconds)
     ).protocols(httpProtocol)
   )
 

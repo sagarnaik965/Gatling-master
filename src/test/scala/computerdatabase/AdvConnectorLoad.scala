@@ -8,7 +8,7 @@ import scala.concurrent.duration.DurationInt
 class AdvConnectorLoad extends Simulation {
   val httpProtocol = http
 //    .baseUrl("http://localhost:8080")
-    .baseUrl("http://localhost:3000")
+    .baseUrl("http://localhost:8080")
   val csvFeeder = csv("data/Connector11Load.csv")
  // val csvFeeder = csv("data/secure2.csv")
 
@@ -21,9 +21,10 @@ class AdvConnectorLoad extends Simulation {
     //      })
     .exec(http("LoadTest For Adv Connector ")
 //      .post("/struid")
-      .get("/check")
+      .post("/getuid")
 //      .header("Content-Type", "text/plain")
 //      .body(StringBody("${aadhaar}"))
+      .body(StringBody("{\n    \"aadhaarNum\": \"345871005735\",\n    \"refNum\": \"1263427975869546496\",\n    \"ac\": \"A100001\",\n    \"sa\": \"A100001\",\n    \"lk\": \"ddb81abd-23d7-4cf6-ab5e-29d01bcc2950\",\n    \"keytype\": \"aes\",\n    \"tkntype\": \"soft\",\n    \"url\": \"http://10.210.9.67:8080/vault/\"\n}")).asJson
 
       //.body(StringBody("""744709211664,MALE"""))
       //      .body(StringBody("""#{aadhaar},MALE"""))
@@ -36,8 +37,10 @@ class AdvConnectorLoad extends Simulation {
 
   setUp(
         scnAdvLoad.inject(
-          constantUsersPerSec(25) during (10 seconds)
-    //        constantUsersPerSec(700) during (120 seconds)
+//          constantUsersPerSec(25) during (10 seconds)
+            rampConcurrentUsers(100) to 120 during (1 minute)
+
+          //        constantUsersPerSec(700) during (120 seconds)
         ).protocols(httpProtocol)
 
 //    scnAdvLoad.inject(
