@@ -21,7 +21,7 @@ class AdvConnectorLoad extends Simulation {
     //      })
     .exec(http("LoadTest For Adv Connector ")
 //      .post("/struid")
-      .post("/getuid")
+      .post("/getui")
 //      .header("Content-Type", "text/plain")
 //      .body(StringBody("${aadhaar}"))
       .body(StringBody("{\n    \"aadhaarNum\": \"345871005735\",\n    \"refNum\": \"1263427975869546496\",\n    \"ac\": \"A100001\",\n    \"sa\": \"A100001\",\n    \"lk\": \"ddb81abd-23d7-4cf6-ab5e-29d01bcc2950\",\n    \"keytype\": \"aes\",\n    \"tkntype\": \"soft\",\n    \"url\": \"http://10.210.9.67:8080/vault/\"\n}")).asJson
