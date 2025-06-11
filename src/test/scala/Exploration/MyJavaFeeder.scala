@@ -1,3 +1,5 @@
+package Exploration
+
 import com.myGatlingTest.JavaClass
 import io.gatling.core.feeder.Feeder
 

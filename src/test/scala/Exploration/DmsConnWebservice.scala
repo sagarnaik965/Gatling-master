@@ -1,10 +1,7 @@
-package myGatlingTest
+package Exploration
 
-import io.gatling.core.Predef.{constantUsersPerSec, _}
-import io.gatling.http.Predef._
+import io.gatling.core.Predef.{Simulation, constantUsersPerSec, _}
 import io.gatling.http.Predef.http
-import io.gatling.core.Predef.Simulation
-import javafx.util.Duration.seconds
 
 import scala.concurrent.duration.DurationInt
 
