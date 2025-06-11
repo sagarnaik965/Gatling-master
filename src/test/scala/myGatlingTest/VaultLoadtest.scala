@@ -20,13 +20,18 @@ class VaultLoadtest extends Simulation {
       //      //----------------------------  XML for Stagging Vault   ------------------------------------
 //            .body(StringBody("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<request ac=\"1\" sa=\"1\" opr=\"struid\" tkntype=\"soft\" keytype=\"aes\" lk=\"db2aa4cb-94ce-45ca-87b9-490dfa68ff76\" ts=\"2025-05-02T10:39:07.933\" txn=\"${txn}\" mac=\"5C-60-BA-A2-60-E3\" ip=\"10.210.8.141\" xmlns=\"http://www.cdac.in/cryptoservice\">\n    <data>${data}</data>\n</request>")).asXml
 
-      .body(StringBody("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<request ac=\"A100001\" sa=\"A100001\" opr=\"struid\" tkntype=\"soft\" keytype=\"aes\" lk=\"ddb81abd-23d7-4cf6-ab5e-29d01bcc2951\" ts=\"2025-05-27T10:39:07.933\" txn=\"${txn}\" mac=\"5C-60-BA-A2-60-E3\" ip=\"10.210.8.141\" xmlns=\"http://www.cdac.in/cryptoservice\">\n    <data>${txn}</data>\n</request>")).asXml
+      .body(StringBody("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<request ac=\"A100001\" sa=\"A100001\" opr=\"struid\" tkntype=\"soft\" keytype=\"aes\" lk=\"ddb81abd-23d7-4cf6-ab5e-29d01bcc2951\" ts=\"2025-05-28T10:39:07.933\" txn=\"${txn}\" mac=\"5C-60-BA-A2-60-E3\" ip=\"10.210.8.141\" xmlns=\"http://www.cdac.in/cryptoservice\">\n    <data>${txn}</data>\n</request>")).asXml
 
     )
+    .exec(session => {
+      println("Request txn: " + session("txn").as[String])
+      session
+    })
+
 
   setUp(
     scnAdvLoad.inject(
-      constantUsersPerSec(100) during (300 seconds)
+      constantUsersPerSec(10) during (1 seconds)
 //      rampConcurrentUsers(200).to(400).during(100)
     ).protocols(httpProtocol))
 }
