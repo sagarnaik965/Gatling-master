@@ -7,17 +7,17 @@ import java.util.UUID
 import scala.concurrent.duration.DurationInt
 class ApiCall extends Simulation {
   val httpProtocol = http
-    .baseUrl("http://localhost:8080/")
+    .baseUrl("http://10.210.9.97/")
 
   val scnAdvLoad = scenario("LoadTest")
     .exec(http("LoadTest For Sample War for Dockers ")
-      .get("square/5")
+      .get("php/connector.php")
 
     )
 
   setUp(
     scnAdvLoad.inject(
-      constantUsersPerSec(10000) during (1 seconds)
+      constantUsersPerSec(10) during (1 seconds)
 //      rampConcurrentUsers(10).to(30).during(300)
     ).protocols(httpProtocol))
 }
